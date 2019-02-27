@@ -20,9 +20,9 @@ RUN chown -R mysql:mysql /var/lib/mysql && /etc/init.d/mysql start \
 &&  mysql -uroot -e "grant all privileges on *.* to 'root'@'localhost' identified by '123456';" 
 RUN sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf 
 # Install Tomcat7
-RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v7.0.92/bin/apache-tomcat-7.0.92.tar.gz && \
-tar xvf apache-tomcat-7.0.92.tar.gz -C /usr/local && mv /usr/local/apache-tomcat-7.0.92 /usr/local/tomcat
-RUN rm -f apache-tomcat-7.0.92.tar.gz
+RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v7.0.93/bin/apache-tomcat-7.0.93.tar.gz && \
+tar xvf apache-tomcat-7.0.93.tar.gz -C /usr/local && mv /usr/local/apache-tomcat-7.0.93 /usr/local/tomcat
+RUN rm -f apache-tomcat-7.0.93.tar.gz
 # Add Tomcat Manager Gui user & password
 RUN echo '<tomcat-users> \
 <role rolename="manager-gui"/> \
