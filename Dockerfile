@@ -26,7 +26,8 @@ RUN rm -f apache-tomcat-7.0.93.tar.gz
 # Add Tomcat Manager Gui user & password
 RUN echo '<tomcat-users> \
 <role rolename="manager-gui"/> \
-<user username="tomcat" password="123456" roles="manager-gui"/> \
+<role rolename="manager-script"/> \
+<user username="tomcat" password="123456" roles="admin,manager-gui,manager-script,manager-status"/> \
 </tomcat-users>' > /usr/local/tomcat/conf/tomcat-users.xml
 # Setup Timezone
 RUN apt-get install -y tzdata
