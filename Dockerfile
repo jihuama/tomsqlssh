@@ -2,7 +2,8 @@
 FROM ubuntu:16.04
 # Auther 
 MAINTAINER charles "jihua.ma@gmail.com"
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai \
+    TOMCAT_VERSION=7.0.108
 RUN apt-get update
 RUN apt-get install -y openssh-server
 RUN mkdir -p /var/run/sshd
@@ -20,9 +21,9 @@ RUN chown -R mysql:mysql /var/lib/mysql && /etc/init.d/mysql start \
 &&  mysql -uroot -e "grant all privileges on *.* to 'root'@'localhost' identified by '123456';" 
 RUN sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf 
 # Install Tomcat7
-RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v7.0.93/bin/apache-tomcat-7.0.93.tar.gz && \
-tar xvf apache-tomcat-7.0.93.tar.gz -C /usr/local && mv /usr/local/apache-tomcat-7.0.93 /usr/local/tomcat
-RUN rm -f apache-tomcat-7.0.93.tar.gz
+RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+tar xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz -C /usr/local && mv /usr/local/apache-tomcat-${TOMCAT_VERSION} /usr/local/tomcat
+RUN rm -f apache-tomcat-${TOMCAT_VERSION}.tar.gz
 # Add Tomcat Manager Gui user & password
 RUN echo '<tomcat-users> \
 <role rolename="manager-gui"/> \
